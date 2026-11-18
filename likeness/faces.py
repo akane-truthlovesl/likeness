@@ -7,6 +7,7 @@ falls back to a plain pixel proxy that is labelled as such.
 
 from __future__ import annotations
 
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -34,7 +35,10 @@ class FaceTools:
         import onnxruntime as ort
 
         self.np = np
-        providers = [p for p in ("CUDAExecutionProvider", "CPUExecutionProvider") if p in ort.get_available_providers()]
+        available = ort.get_available_providers()
+        if sys.platform == "win32" and "CUDAExecutionProvider" in available:
+            ort.preload_dlls(msvc=False)
+        providers = [p for p in ("CUDAExecutionProvider", "CPUExecutionProvider") if p in available]
         self.detector = ort.InferenceSession(str(folder / DETECTOR), providers=providers)
         self.embedder = ort.InferenceSession(str(folder / EMBEDDER), providers=providers)
         self.provider = self.detector.get_providers()[0]

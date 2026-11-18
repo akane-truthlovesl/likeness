@@ -17,7 +17,7 @@ import os
 import tomllib
 from dataclasses import dataclass
 
-from PIL import Image
+from PIL import Image, ImageOps
 
 from .. import paths
 from . import RenderRequest, StepCallback
@@ -72,7 +72,15 @@ class DiffusersEngine:
         p = self.profile
         if p.loader == "pipeline":
             pipe = getattr(diffusers, p.cls).from_pretrained(p.repo, revision=_pinned(p.repo), dtype=torch.bfloat16)
-            pipe.to("cuda") if self.strategy == "cuda" else pipe.enable_model_cpu_offload()
+            if self.strategy == "cuda":
+                free, _ = torch.cuda.mem_get_info()
+                weights = sum(parameter.nbytes for model in pipe.components.values()
+                              if isinstance(model, torch.nn.Module) for parameter in model.parameters())
+                if weights > free:
+                    raise torch.cuda.OutOfMemoryError("Model weights exceed available GPU memory for full CUDA residency. Use offload.")
+                pipe.to("cuda")
+            else:
+                pipe.enable_model_cpu_offload()
         else:
             blocks = diffusers.ModularPipeline.from_pretrained(p.repo).blocks
             for name in p.drop_blocks:
@@ -81,7 +89,7 @@ class DiffusersEngine:
             pipe.load_components(dtype=torch.bfloat16)
             pipe.to("cuda")
         self.pipe = pipe
-        self.device = f"{torch.cuda.get_device_name(0)} · {torch.cuda.get_device_properties(0).total_memory / 2**30:.0f} GB"
+        self.device = f"{torch.cuda.get_device_name(0)} \u00b7 {torch.cuda.get_device_properties(0).total_memory / 2**30:.0f} GB"
         self.ready = True
 
     def _set_lora(self, path: str) -> None:
@@ -114,13 +122,19 @@ class DiffusersEngine:
         else:
             kwargs.update(num_inference_steps=steps, true_cfg_scale=request.guidance)
 
+        # Qwen packs latents in 2x2 patches. Render at the next compatible size and crop to the requested plate.
+        stride = self.pipe.vae_scale_factor * 2
+        kwargs["width"] = ((request.width + stride - 1) // stride) * stride
+        kwargs["height"] = ((request.height + stride - 1) // stride) * stride
+
         def step_end(pipe, index, timestep, state):
             on_step(index + 1, steps)
             return state
 
         try:
-            return self.pipe(**kwargs, callback_on_step_end=step_end).images[0]
+            image = self.pipe(**kwargs, callback_on_step_end=step_end).images[0]
         except TypeError:   # a pipeline without step callbacks still renders; it only reports the end
             image = self.pipe(**kwargs).images[0]
             on_step(steps, steps)
-            return image
+        size = (request.width, request.height)
+        return ImageOps.fit(image, size, method=Image.Resampling.LANCZOS) if image.size != size else image
