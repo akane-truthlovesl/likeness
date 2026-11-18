@@ -1,0 +1,201 @@
+{
+  "version": 1,
+  "worlds": {
+    "noir": {
+      "world": "noir",
+      "name": "Neon Noir",
+      "locked": {
+        "engine": "qwen21_turbo",
+        "steps": 8,
+        "guidance": 1.0,
+        "width": 896,
+        "height": 1200,
+        "reference": "photograph",
+        "identity_floor": 0.38,
+        "lora": "",
+        "engine_label": "Qwen-Image 2.1 Turbo",
+        "prompt": "Repaint the person in the input photograph as a cinematic neon-noir portrait photograph. Keep this exact person recognisable: the same face shape, eyes, nose, mouth, skin tone, apparent age and hairstyle, with the same expression and the same head pose. Head and shoulders, centred, facing the camera, one person only. A rain-slick city street after midnight. There is no key light: a magenta neon rim from the left and a cyan rim from the right, deep violet shadow between them, wet reflections, soft bokeh of signs behind, light rain, sodium haze, shallow depth of field, 85 mm lens, fine film grain."
+      },
+      "naive": {
+        "engine": "qwen21_turbo",
+        "steps": 8,
+        "guidance": 1.0,
+        "width": 896,
+        "height": 1200,
+        "reference": "none",
+        "identity_floor": 0.0,
+        "lora": "",
+        "engine_label": "Qwen-Image 2.1 Turbo",
+        "prompt": "A head-and-shoulders portrait of a person with [skin], [hair], [glasses], [beard], [expression], as a cinematic neon-noir portrait photograph. Centred, facing the camera, one person only. A rain-slick city street after midnight. There is no key light: a magenta neon rim from the left and a cyan rim from the right, deep violet shadow between them, wet reflections, soft bokeh of signs behind, light rain, sodium haze, shallow depth of field, 85 mm lens, fine film grain."
+      }
+    },
+    "oil": {
+      "world": "oil",
+      "name": "Chiaroscuro",
+      "locked": {
+        "engine": "qwen21_turbo",
+        "steps": 8,
+        "guidance": 1.0,
+        "width": 896,
+        "height": 1200,
+        "reference": "photograph",
+        "identity_floor": 0.38,
+        "lora": "",
+        "engine_label": "Qwen-Image 2.1 Turbo",
+        "prompt": "Repaint the person in the input photograph as a seventeenth-century chiaroscuro oil portrait. Keep this exact person recognisable: the same face shape, eyes, nose, mouth, skin tone, apparent age and hairstyle, with the same expression and the same head pose. Head and shoulders, centred, facing the camera, one person only. A single high window from the upper left, an umber ground, half the face falling into warm shadow, a dark doublet with a plain white linen collar, visible wet-in-wet brushwork, fine canvas weave, aged varnish, a dark vignette."
+      },
+      "naive": {
+        "engine": "qwen21_turbo",
+        "steps": 8,
+        "guidance": 1.0,
+        "width": 896,
+        "height": 1200,
+        "reference": "none",
+        "identity_floor": 0.0,
+        "lora": "",
+        "engine_label": "Qwen-Image 2.1 Turbo",
+        "prompt": "A head-and-shoulders portrait of a person with [skin], [hair], [glasses], [beard], [expression], as a seventeenth-century chiaroscuro oil portrait. Centred, facing the camera, one person only. A single high window from the upper left, an umber ground, half the face falling into warm shadow, a dark doublet with a plain white linen collar, visible wet-in-wet brushwork, fine canvas weave, aged varnish, a dark vignette."
+      }
+    },
+    "clay": {
+      "world": "clay",
+      "name": "Studio Clay",
+      "locked": {
+        "engine": "qwen21_turbo",
+        "steps": 8,
+        "guidance": 1.0,
+        "width": 896,
+        "height": 1200,
+        "reference": "photograph",
+        "identity_floor": 0.2,
+        "lora": "",
+        "engine_label": "Qwen-Image 2.1 Turbo",
+        "prompt": "Repaint the person in the input photograph as a hand-sculpted stop-motion clay character. Keep this exact person recognisable: the same face shape, eyes, nose, mouth, skin tone, apparent age and hairstyle, with the same expression and the same head pose. Head and shoulders, centred, facing the camera, one person only. Plasticine with visible thumbprints and tool marks, bead-like eyes, a rounded simplified nose, matte clay with soft highlights, a knitted jumper, a plain warm tabletop backdrop, soft-box light from the upper left, miniature set photography, shallow depth of field."
+      },
+      "naive": {
+        "engine": "qwen21_turbo",
+        "steps": 8,
+        "guidance": 1.0,
+        "width": 896,
+        "height": 1200,
+        "reference": "none",
+        "identity_floor": 0.0,
+        "lora": "",
+        "engine_label": "Qwen-Image 2.1 Turbo",
+        "prompt": "A head-and-shoulders portrait of a person with [skin], [hair], [glasses], [beard], [expression], as a hand-sculpted stop-motion clay character. Centred, facing the camera, one person only. Plasticine with visible thumbprints and tool marks, bead-like eyes, a rounded simplified nose, matte clay with soft highlights, a knitted jumper, a plain warm tabletop backdrop, soft-box light from the upper left, miniature set photography, shallow depth of field."
+      }
+    },
+    "cinema": {
+      "world": "cinema",
+      "name": "Cinema 3D",
+      "locked": {
+        "engine": "qwen21_turbo",
+        "steps": 8,
+        "guidance": 1.0,
+        "width": 896,
+        "height": 1200,
+        "reference": "photograph",
+        "identity_floor": 0.24,
+        "lora": "",
+        "engine_label": "Qwen-Image 2.1 Turbo",
+        "prompt": "Repaint the person in the input photograph as a character from a modern 3D animated feature film. Keep this exact person recognisable: the same face shape, eyes, nose, mouth, skin tone, apparent age and hairstyle, with the same expression and the same head pose. Head and shoulders, centred, facing the camera, one person only. Stylised proportions with large expressive eyes, soft subsurface skin, groomed stylised hair, a warm key light from the left, a cool fill and a bright rim light, a softly blurred dusk background with bokeh, a rendered film still."
+      },
+      "naive": {
+        "engine": "qwen21_turbo",
+        "steps": 8,
+        "guidance": 1.0,
+        "width": 896,
+        "height": 1200,
+        "reference": "none",
+        "identity_floor": 0.0,
+        "lora": "",
+        "engine_label": "Qwen-Image 2.1 Turbo",
+        "prompt": "A head-and-shoulders portrait of a person with [skin], [hair], [glasses], [beard], [expression], as a character from a modern 3D animated feature film. Centred, facing the camera, one person only. Stylised proportions with large expressive eyes, soft subsurface skin, groomed stylised hair, a warm key light from the left, a cool fill and a bright rim light, a softly blurred dusk background with bokeh, a rendered film still."
+      }
+    },
+    "brick": {
+      "world": "brick",
+      "name": "Brick Miniature",
+      "locked": {
+        "engine": "qwen21_turbo",
+        "steps": 8,
+        "guidance": 1.0,
+        "width": 896,
+        "height": 1200,
+        "reference": "photograph",
+        "identity_floor": 0.0,
+        "lora": "",
+        "engine_label": "Qwen-Image 2.1 Turbo",
+        "prompt": "Repaint the person in the input photograph as a toy brick minifigure. Keep this exact person recognisable: the same face shape, eyes, nose, mouth, skin tone, apparent age and hairstyle, with the same expression and the same head pose. Head and shoulders, centred, facing the camera, one person only. A cylindrical head with a simple printed face, a moulded plastic hair piece in the same hairstyle and colour, a blocky printed torso echoing the same clothes, glossy ABS plastic, a studio product photograph on a bright seamless backdrop with a few out-of-focus bricks behind, hard gloss highlights."
+      },
+      "naive": {
+        "engine": "qwen21_turbo",
+        "steps": 8,
+        "guidance": 1.0,
+        "width": 896,
+        "height": 1200,
+        "reference": "none",
+        "identity_floor": 0.0,
+        "lora": "",
+        "engine_label": "Qwen-Image 2.1 Turbo",
+        "prompt": "A head-and-shoulders portrait of a person with [skin], [hair], [glasses], [beard], [expression], as a toy brick minifigure. Centred, facing the camera, one person only. A cylindrical head with a simple printed face, a moulded plastic hair piece in the same hairstyle and colour, a blocky printed torso echoing the same clothes, glossy ABS plastic, a studio product photograph on a bright seamless backdrop with a few out-of-focus bricks behind, hard gloss highlights."
+      }
+    },
+    "cel": {
+      "world": "cel",
+      "name": "Inked Cel",
+      "locked": {
+        "engine": "qwen21_turbo",
+        "steps": 8,
+        "guidance": 1.0,
+        "width": 896,
+        "height": 1200,
+        "reference": "photograph",
+        "identity_floor": 0.0,
+        "lora": "",
+        "engine_label": "Qwen-Image 2.1 Turbo",
+        "prompt": "Repaint the person in the input photograph as a hand-inked animation cel. Keep this exact person recognisable: the same face shape, eyes, nose, mouth, skin tone, apparent age and hairstyle, with the same expression and the same head pose. Head and shoulders, centred, facing the camera, one person only. Clean confident ink outlines, flat cel-painted colour with a single hard shadow shape, a streak of highlight in the hair, large expressive eyes, a bright sky with simple clouds behind, a crisp feature-animation key frame."
+      },
+      "naive": {
+        "engine": "qwen21_turbo",
+        "steps": 8,
+        "guidance": 1.0,
+        "width": 896,
+        "height": 1200,
+        "reference": "none",
+        "identity_floor": 0.0,
+        "lora": "",
+        "engine_label": "Qwen-Image 2.1 Turbo",
+        "prompt": "A head-and-shoulders portrait of a person with [skin], [hair], [glasses], [beard], [expression], as a hand-inked animation cel. Centred, facing the camera, one person only. Clean confident ink outlines, flat cel-painted colour with a single hard shadow shape, a streak of highlight in the hair, large expressive eyes, a bright sky with simple clouds behind, a crisp feature-animation key frame."
+      }
+    },
+    "knight": {
+      "world": "knight",
+      "name": "The Order",
+      "locked": {
+        "engine": "qwen21_turbo",
+        "steps": 8,
+        "guidance": 1.0,
+        "width": 896,
+        "height": 1200,
+        "reference": "photograph",
+        "identity_floor": 0.38,
+        "lora": "",
+        "engine_label": "Qwen-Image 2.1 Turbo",
+        "prompt": "Repaint the person in the input photograph as a knight in a painted fantasy portrait. Keep this exact person recognisable: the same face shape, eyes, nose, mouth, skin tone, apparent age and hairstyle, with the same expression and the same head pose. Head and shoulders, centred, facing the camera, one person only. Worn steel plate armour with a gorget and pauldrons, a wool cloak, a cold daylight key from an arrow-slit on the left and a warm torch rim from the right, a stone wall with a hanging heraldic banner behind, embers in the air, a detailed realistic digital painting."
+      },
+      "naive": {
+        "engine": "qwen21_turbo",
+        "steps": 8,
+        "guidance": 1.0,
+        "width": 896,
+        "height": 1200,
+        "reference": "none",
+        "identity_floor": 0.0,
+        "lora": "",
+        "engine_label": "Qwen-Image 2.1 Turbo",
+        "prompt": "A head-and-shoulders portrait of a person with [skin], [hair], [glasses], [beard], [expression], as a knight in a painted fantasy portrait. Centred, facing the camera, one person only. Worn steel plate armour with a gorget and pauldrons, a wool cloak, a cold daylight key from an arrow-slit on the left and a warm torch rim from the right, a stone wall with a hanging heraldic banner behind, embers in the air, a detailed realistic digital painting."
+      }
+    }
+  }
+}

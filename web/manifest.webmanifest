@@ -1,0 +1,11 @@
+{
+  "name": "Likeness",
+  "short_name": "Likeness",
+  "description": "Seven studios. One face.",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#121110",
+  "theme_color": "#121110",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

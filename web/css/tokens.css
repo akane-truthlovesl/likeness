@@ -1,0 +1,23 @@
+/* Likeness — tokens: type, colour, motion. Two grounds only: paper for the monograph, night for the instrument. */
+@font-face { font-family: 'Fraunces'; src: url('../fonts/fraunces.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Fraunces'; src: url('../fonts/fraunces-italic.woff2') format('woff2'); font-weight: 100 900; font-style: italic; font-display: swap; }
+@font-face { font-family: 'IBM Plex Mono'; src: url('../fonts/plex-mono-400.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'IBM Plex Mono'; src: url('../fonts/plex-mono-500.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+
+:root {
+  --paper: #f3eee4; --paper-rise: #faf6ee; --paper-deep: #e7dfd0; --ink: #1a1714; --ink-soft: #6b6258;
+  --night: #121110; --night-rise: #1d1b18; --bone: #ede6da; --bone-soft: #91897d;
+  --vermilion: #d8432b; --amber: #dba03a; --verdigris: #4f9a86;
+  --serif: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --ease: cubic-bezier(.2, .7, .1, 1); --ease-in: cubic-bezier(.55, 0, .85, .35);
+  --slow: 760ms; --dur: 520ms; --quick: 200ms;
+  /* How much taller than 9:16 the stage is: nothing on a 9:16 stage, room for the plates to grow on a tall phone. */
+  --tall: clamp(0cqw, 100cqh - 177.78cqw, 48cqw);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.paper { --bg: var(--paper); --bg-rise: var(--paper-rise); --bg-deep: var(--paper-deep); --fg: var(--ink); --fg-soft: var(--ink-soft); --rule: rgba(26, 23, 20, .16); --accent: var(--vermilion); --on-accent: #fff8ee; --grain-mix: multiply; --grain-a: .16; }
+.night { --bg: var(--night); --bg-rise: var(--night-rise); --bg-deep: #0a0908; --fg: var(--bone); --fg-soft: var(--bone-soft); --rule: rgba(237, 230, 218, .16); --accent: #ee5b3d; --on-accent: #1a0d08; --grain-mix: screen; --grain-a: .1; }
+
+@media (prefers-reduced-motion: reduce) { :root { --slow: 1ms; --dur: 1ms; --quick: 1ms; } }
