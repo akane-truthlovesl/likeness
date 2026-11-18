@@ -1,0 +1,57 @@
+# Packet 0001: workstation bring-up. Run with   uv run likeness relay run 0001
+# Each stage is an argument list (no shell). A failed gate stops the run; stages with  gate = false  are reported and passed over.
+id = "0001-workstation-bringup"
+title = "Workstation bring-up: environment, models, first renders, timings"
+
+[[stage]]
+id = "probe"          # what this machine is; fails unless PyTorch can use the GPU
+run = ["uv", "run", "likeness", "probe", "--require-gpu", "--out", "relay/0001-workstation-bringup/out/probe.json"]
+timeout = 600
+expect = ["relay/0001-workstation-bringup/out/probe.json"]
+
+[[stage]]
+id = "tests"          # the studio's own tests; no GPU involved
+run = ["uv", "run", "pytest", "-q"]
+timeout = 900
+
+[[stage]]
+id = "simulator"      # the whole pipeline with the stand-in engine: Python, paths and files on this machine
+run = ["uv", "run", "likeness", "smoke", "--engine", "mock", "--out", "relay/0001-workstation-bringup/out/simulator"]
+timeout = 600
+expect = ["relay/0001-workstation-bringup/out/simulator/smoke-mock.json", "relay/0001-workstation-bringup/out/simulator/sheet-mock.jpg"]
+
+[[stage]]
+id = "fetch"          # Qwen-Image 2.1 Turbo (32.5 GB, not gated) and the face models (0.3 GB); resumes if interrupted
+run = ["uv", "run", "likeness", "fetch", "qwen21_turbo", "faces", "--out", "relay/0001-workstation-bringup/out/fetch.json"]
+timeout = 28800
+expect = ["relay/0001-workstation-bringup/out/fetch.json", "private/models/faces/det_10g.onnx", "private/models/faces/w600k_r50.onnx"]
+
+[[stage]]
+id = "smoke"          # the first real renders: two drawn sitters in three worlds
+run = ["uv", "run", "likeness", "smoke", "--engine", "qwen21_turbo", "--worlds", "clay,noir,oil", "--out", "relay/0001-workstation-bringup/out/smoke"]
+timeout = 3600
+expect = ["relay/0001-workstation-bringup/out/smoke/smoke-qwen21_turbo.json", "relay/0001-workstation-bringup/out/smoke/sheet-qwen21_turbo.jpg"]
+
+[[stage]]
+id = "worlds"         # both sitters in all seven worlds: the sheet that goes back to be judged
+run = ["uv", "run", "likeness", "smoke", "--engine", "qwen21_turbo", "--worlds", "noir,oil,clay,cinema,brick,cel,knight", "--out", "relay/0001-workstation-bringup/out/worlds"]
+timeout = 3600
+gate = false
+
+[[stage]]
+id = "matrix"         # two loading strategies at three sizes; running out of memory is a result here, not a failure
+run = ["uv", "run", "likeness", "matrix", "--engine", "qwen21_turbo", "--out", "relay/0001-workstation-bringup/out/matrix"]
+timeout = 5400
+gate = false
+
+[[stage]]
+id = "fetch-klein"    # FLUX 3 Image Klein (20.4 GB, gated): fails until its licence is accepted, and that is fine
+run = ["uv", "run", "likeness", "fetch", "flux3_klein", "--out", "relay/0001-workstation-bringup/out/fetch-klein.json"]
+timeout = 21600
+gate = false
+
+[[stage]]
+id = "smoke-klein"
+run = ["uv", "run", "likeness", "smoke", "--engine", "flux3_klein", "--worlds", "clay,noir,oil", "--out", "relay/0001-workstation-bringup/out/smoke-klein"]
+timeout = 3600
+gate = false

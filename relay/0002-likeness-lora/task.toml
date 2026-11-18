@@ -1,0 +1,31 @@
+# Packet 0002: a LoRA of the sitter's own face. Run with   uv run likeness relay run 0002
+# Optional: it waits to be asked for, needs packet 0001 finished, the user's photographs in private/enrol/in,
+# and ai-toolkit installed in workstation/ai-toolkit (PROMPT.md, Step 2).
+id = "0002-likeness-lora"
+title = "A LoRA of the sitter's own face: enrol, train, judge, adopt"
+optional = true
+
+[[stage]]
+id = "enrol"          # checks, crops and captions the photographs; holds a few back. Prints counts only.
+run = ["uv", "run", "likeness", "enrol", "--out", "relay/0002-likeness-lora/out/enrol.json"]
+timeout = 1800
+expect = ["private/enrol/enrol.json"]
+
+[[stage]]
+id = "config"         # writes private/enrol/likeness-lora.yaml from train/likeness-lora.qwen21-turbo.yaml
+run = ["uv", "run", "likeness", "train-config", "--name", "likeness_v1"]
+timeout = 300
+expect = ["private/enrol/likeness-lora.yaml"]
+
+[[stage]]
+id = "train"          # ai-toolkit, in its own environment and folder. "{root}" is this repository.
+cwd = "workstation/ai-toolkit"
+run = ["{root}/workstation/ai-toolkit/venv/Scripts/python.exe", "run.py", "{root}/private/enrol/likeness-lora.yaml"]
+timeout = 36000
+expect = ["private/lora/runs/likeness_v1/likeness_v1.safetensors"]
+
+[[stage]]
+id = "check"          # renders the held-out photographs without and with the LoRA; adopts it only if it helps
+run = ["uv", "run", "likeness", "lora-check", "--engine", "qwen21_turbo", "--lora", "private/lora/runs/likeness_v1/likeness_v1.safetensors", "--out", "relay/0002-likeness-lora/out/check", "--adopt"]
+timeout = 7200
+expect = ["relay/0002-likeness-lora/out/check/lora-check.json"]
