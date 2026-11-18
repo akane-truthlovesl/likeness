@@ -1,0 +1,8 @@
+# One line ending everywhere, so the Linux machine and the Windows laptop never argue about it.
+* text=auto eol=lf
+*.woff2 binary
+*.wasm binary
+*.task binary
+*.tflite binary
+*.jpg binary
+*.png binary
