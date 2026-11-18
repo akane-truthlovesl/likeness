@@ -1,0 +1,78 @@
+---
+# Likeness: a LoRA of the sitter's own face for Qwen-Image 2.1 Turbo, trained with ostris/ai-toolkit.
+#
+# This is a template.  uv run likeness train-config  fills in this machine's paths and writes the result to
+# private/enrol/likeness-lora.yaml; that file is what ai-toolkit runs:   python run.py <that file>
+#
+# Where every key comes from (ai-toolkit at commit 7a5fe1a8ca72276e1376ce6577f853b480c45576, 2026-11-16):
+#   the overall shape         config/examples/train_lora_qwen_image_24gb.yaml and train_lora_qwen_image_edit_2509_32gb.yaml
+#   the model block           the UI defaults for "Qwen-Image-2.1 Turbo (w/ Training Adapter)" in
+#                             extensions_built_in/diffusion_models/ui.tsx (name "qwen_image_2:turbo")
+#   what turbo training is    the docstring of extensions_built_in/diffusion_models/qwen_image_2/qwen_image_2.py
+# It was written on a machine with no GPU and has never run. If the toolkit rejects a key, trust the toolkit:
+# fix this template, say so in the packet's REPORT.md, and carry on.
+job: extension
+config:
+  name: "__NAME__"
+  process:
+    - type: "diffusion_trainer"
+      training_folder: "__OUTPUT__"
+      device: cuda:0
+      network:
+        type: "lora"
+        linear: 16
+        linear_alpha: 16
+      save:
+        dtype: float16
+        save_every: 250
+        max_step_saves_to_keep: 6
+      datasets:
+        # private/enrol/dataset: square crops with captions that already contain the trigger words
+        - folder_path: "__DATASET__"
+          caption_ext: "txt"
+          caption_dropout_rate: 0.05
+          cache_latents_to_disk: true
+          resolution: [512, 768, 1024]
+      train:
+        batch_size: 1
+        cache_text_embeddings: true
+        steps: 1500
+        gradient_accumulation: 1
+        timestep_type: "shift"
+        train_unet: true
+        train_text_encoder: false
+        gradient_checkpointing: true
+        noise_scheduler: "flowmatch"
+        optimizer: "adamw8bit"
+        lr: 1e-4
+        dtype: bf16
+      model:
+        # The turbo weights in the Comfy-Org repack (pre-quantised int8), trained through the toolkit's training adapter.
+        name_or_path: "Comfy-Org/Qwen-Image-2.1/diffusion_models/qwen_image_2.1_turbo_int8_convrot.safetensors"
+        arch: "qwen_image_2:turbo"
+        assistant_lora_path: "ostris/qwen_image_2_turbo_training_adapter/qwen_image_2_turbo_training_adapter_v1.safetensors"
+        quantize: true
+        qtype: "convrot8"
+        quantize_te: true
+        qtype_te: "convrot8"
+        low_vram: true
+        model_kwargs:
+          turbo: true
+          rgba: false
+      sample:
+        sampler: "flowmatch"
+        sample_every: 250
+        width: 896
+        height: 1200
+        prompts:
+          - "a photo of __TRIGGER__, head and shoulders portrait, plain grey studio backdrop, soft window light"
+          - "__TRIGGER__ as a hand-sculpted stop-motion clay character, plasticine with visible thumbprints, head and shoulders"
+          - "an oil painting of __TRIGGER__, head and shoulders, one high window, umber ground, visible brushwork"
+        neg: ""
+        seed: 42
+        walk_seed: true
+        guidance_scale: 1.0
+        sample_steps: 8
+meta:
+  name: "[name]"
+  version: "1.0"

@@ -1,0 +1,10 @@
+world = "cel"
+name = "Inked Cel"
+medium = "as a hand-inked animation cel"
+scene = """Clean confident ink outlines, flat cel-painted colour with a single hard shadow shape, a streak of highlight in the hair, large expressive eyes, a bright sky with simple clouds behind, a crisp feature-animation key frame."""
+
+# Both variants start from the defaults in likeness/recipes.py (Variant); only differences are written here.
+[locked]
+identity_floor = 0.0
+
+[naive]

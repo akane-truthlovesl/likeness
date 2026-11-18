@@ -1,0 +1,9 @@
+world = "knight"
+name = "The Order"
+medium = "as a knight in a painted fantasy portrait"
+scene = """Worn steel plate armour with a gorget and pauldrons, a wool cloak, a cold daylight key from an arrow-slit on the left and a warm torch rim from the right, a stone wall with a hanging heraldic banner behind, embers in the air, a detailed realistic digital painting."""
+
+# Both variants start from the defaults in likeness/recipes.py (Variant); only differences are written here.
+[locked]
+
+[naive]

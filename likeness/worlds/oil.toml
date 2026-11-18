@@ -1,0 +1,9 @@
+world = "oil"
+name = "Chiaroscuro"
+medium = "as a seventeenth-century chiaroscuro oil portrait"
+scene = """A single high window from the upper left, an umber ground, half the face falling into warm shadow, a dark doublet with a plain white linen collar, visible wet-in-wet brushwork, fine canvas weave, aged varnish, a dark vignette."""
+
+# Both variants start from the defaults in likeness/recipes.py (Variant); only differences are written here.
+[locked]
+
+[naive]

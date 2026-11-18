@@ -1,0 +1,10 @@
+world = "cinema"
+name = "Cinema 3D"
+medium = "as a character from a modern 3D animated feature film"
+scene = """Stylised proportions with large expressive eyes, soft subsurface skin, groomed stylised hair, a warm key light from the left, a cool fill and a bright rim light, a softly blurred dusk background with bokeh, a rendered film still."""
+
+# Both variants start from the defaults in likeness/recipes.py (Variant); only differences are written here.
+[locked]
+identity_floor = 0.24
+
+[naive]

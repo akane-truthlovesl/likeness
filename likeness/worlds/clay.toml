@@ -1,0 +1,10 @@
+world = "clay"
+name = "Studio Clay"
+medium = "as a hand-sculpted stop-motion clay character"
+scene = """Plasticine with visible thumbprints and tool marks, bead-like eyes, a rounded simplified nose, matte clay with soft highlights, a knitted jumper, a plain warm tabletop backdrop, soft-box light from the upper left, miniature set photography, shallow depth of field."""
+
+# Both variants start from the defaults in likeness/recipes.py (Variant); only differences are written here.
+[locked]
+identity_floor = 0.2
+
+[naive]

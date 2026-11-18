@@ -1,0 +1,11 @@
+world = "brick"
+name = "Brick Miniature"
+medium = "as a toy brick minifigure"
+scene = """A cylindrical head with a simple printed face, a moulded plastic hair piece in the same hairstyle and colour, a blocky printed torso echoing the same clothes, glossy ABS plastic, a studio product photograph on a bright seamless backdrop with a few out-of-focus bricks behind, hard gloss highlights."""
+
+# Both variants start from the defaults in likeness/recipes.py (Variant); only differences are written here.
+[locked]
+# A printed face has no face embedding worth comparing; this world is checked by attributes and by eye.
+identity_floor = 0.0
+
+[naive]

@@ -1,0 +1,32 @@
+# What the workstation downloads, and under which terms. Read by  uv run likeness fetch.
+# Sizes and revisions were read from the Hugging Face file listings on 2026-11-18.
+
+[models.qwen21_turbo]
+kind = "hf"
+repo = "Qwen/Qwen-Image-2.1-Turbo"
+revision = "fc13ba1986fcb905854dc8de2f52eee395f49b5b"
+allow = ["model_index.json", "processor/*", "scheduler/*", "text_encoder/*", "transformer/*", "vae/*"]
+size_gb = 32.5       # text encoder 17.5, transformer 14.2, VAE 0.7
+gated = false
+licence = "Qwen Research License (LICENSE in the repository): personal, non-commercial use"
+note = "8-step checkpoint; loads with QwenImage21Pipeline. Needs a diffusers release with pipeline-configured sigmas (diffusers PR 14950)."
+
+[models.flux3_klein]
+kind = "hf"
+repo = "black-forest-labs/flux-3-image-klein"
+revision = "09561231f44e41381c461caf53d5452005a60ac9"
+allow = ["modular_model_index.json", "text_encoder/*", "transformer/*", "vae/*"]
+size_gb = 20.4       # transformer 11.1, text encoder 8.9, VAE 0.3; the reference-code files and FP8/NVFP4 variants are skipped
+gated = true
+licence = "FLUX licence in LICENSE.md of the repository: accept it on the model page before fetching"
+note = "Distilled, 4 to 16 steps, no guidance; loads with ModularPipeline. The 9B prompt upsampler is not fetched: recipes write full captions."
+
+[models.faces]
+kind = "zip"
+url = "https://github.com/deepinsight/insightface/releases/download/v0.7/buffalo_l.zip"
+members = ["det_10g.onnx", "w600k_r50.onnx"]
+into = "models/faces"
+size_gb = 0.3
+gated = false
+licence = "InsightFace buffalo_l models: non-commercial research use"
+note = "SCRFD detector and ArcFace embedder: the face gate and the likeness score."

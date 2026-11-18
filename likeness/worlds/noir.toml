@@ -1,0 +1,9 @@
+world = "noir"
+name = "Neon Noir"
+medium = "as a cinematic neon-noir portrait photograph"
+scene = """A rain-slick city street after midnight. There is no key light: a magenta neon rim from the left and a cyan rim from the right, deep violet shadow between them, wet reflections, soft bokeh of signs behind, light rain, sodium haze, shallow depth of field, 85 mm lens, fine film grain."""
+
+# Both variants start from the defaults in likeness/recipes.py (Variant); only differences are written here.
+[locked]
+
+[naive]
